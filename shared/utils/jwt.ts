@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import crypto from 'crypto';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-at-least-32-characters-long-change-this-in-env';
@@ -8,9 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-at-least-32-chara
  * @param payload ข้อมูลที่ต้องการบรรจุ in Token (เช่น id, name, role)
  * @param expiresIn อายุของ Token (เช่น '24h', '7d', '1h')
  */
-export function signToken(payload: object, expiresIn: string | number = '24h'): string {
+export function signToken(payload: object, expiresIn: SignOptions['expiresIn'] = '24h'): string {
   return jwt.sign(payload, JWT_SECRET, {
-    expiresIn: expiresIn as (string | number)
+    expiresIn
   });
 }
 
