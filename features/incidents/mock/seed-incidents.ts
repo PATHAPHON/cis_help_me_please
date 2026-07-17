@@ -1,0 +1,126 @@
+import type { Incident } from "@/shared/types";
+
+export const SEED_INCIDENTS: Incident[] = [
+  {
+    id: "i1",
+    reporterId: "u1",
+    reporterName: "สมชาย มีสุข",
+    category: "accident",
+    description:
+      "นักศึกษาลื่นหกล้มบริเวณบันไดชั้น 2 อาคาร A มีบาดแผลที่ขาขวา ต้องการความช่วยเหลือด้านปฐมพยาบาล",
+    locationName: "อาคาร A ชั้น 2 บริเวณบันได",
+    latitude: 13.7563,
+    longitude: 100.5018,
+    imageUrl: "https://placehold.co/400x300/e8f0fe/1a73e8?text=ภาพเหตุการณ์",
+    status: "resolved",
+    createdAt: "2026-07-17T08:30:00.000+07:00",
+    updatedAt: "2026-07-17T09:15:00.000+07:00",
+    rescueLogs: [
+      {
+        id: "rl1",
+        incidentId: "i1",
+        staffId: "s1",
+        staffName: "ร.ต.ท. ประเสริฐ รักษาดี",
+        actionTaken:
+          "เดินทางถึงจุดเกิดเหตุ ทำการปฐมพยาบาลเบื้องต้น พาผู้บาดเจ็บไปห้องพยาบาลเรียบร้อย",
+        createdAt: "2026-07-17T09:00:00.000+07:00",
+      },
+    ],
+  },
+  {
+    id: "i2",
+    reporterId: "u1",
+    reporterName: "สมชาย มีสุข",
+    category: "sickness",
+    description:
+      "นักศึกษาหมดสติในห้องเรียน 301 มีไข้สูง หน้าซีด ต้องการพยาบาลด่วน",
+    locationName: "อาคาร B ห้อง 301",
+    latitude: 13.757,
+    longitude: 100.502,
+    status: "processing",
+    createdAt: "2026-07-17T10:00:00.000+07:00",
+    updatedAt: "2026-07-17T10:10:00.000+07:00",
+    rescueLogs: [
+      {
+        id: "rl2",
+        incidentId: "i2",
+        staffId: "s1",
+        staffName: "ร.ต.ท. ประเสริฐ รักษาดี",
+        actionTaken: "รับเรื่องแล้ว กำลังเดินทางไปยังจุดเกิดเหตุ",
+        createdAt: "2026-07-17T10:10:00.000+07:00",
+      },
+    ],
+  },
+  {
+    id: "i3",
+    reporterId: "u2",
+    reporterName: "วิภาวดี ใจดี",
+    category: "fire",
+    description:
+      "พบควันไฟบริเวณห้องเครื่องของอาคาร C ไม่มีเปลวไฟที่มองเห็น แต่มีกลิ่นไหม้ชัดเจน",
+    locationName: "อาคาร C ห้องเครื่อง ชั้น B1",
+    latitude: 13.758,
+    longitude: 100.503,
+    imageUrl: "https://placehold.co/400x300/fef7e0/f9ab00?text=ภาพเหตุการณ์",
+    status: "pending",
+    createdAt: "2026-07-17T11:30:00.000+07:00",
+    updatedAt: "2026-07-17T11:30:00.000+07:00",
+    rescueLogs: [],
+  },
+  {
+    id: "i4",
+    reporterId: "u2",
+    reporterName: "วิภาวดี ใจดี",
+    category: "violence",
+    description:
+      "พบบุคคลต้องสงสัยพยายามบุกรุกเข้ามาในหอพัก ไม่ยอมแสดงบัตรผ่าน",
+    locationName: "หอพักอาคาร B ประตูทางเข้า",
+    status: "pending",
+    createdAt: "2026-07-17T11:45:00.000+07:00",
+    updatedAt: "2026-07-17T11:45:00.000+07:00",
+    rescueLogs: [],
+  },
+  {
+    id: "i5",
+    reporterId: "u1",
+    reporterName: "สมชาย มีสุข",
+    category: "fight",
+    description:
+      "มีนักศึกษาทะเลาะวิวาทกันบริเวณโรงอาหาร ต้องการเจ้าหน้าที่มาระงับเหตุ",
+    locationName: "โรงอาหารกลาง",
+    status: "resolved",
+    createdAt: "2026-07-16T12:00:00.000+07:00",
+    updatedAt: "2026-07-16T12:30:00.000+07:00",
+    rescueLogs: [
+      {
+        id: "rl3",
+        incidentId: "i5",
+        staffId: "s2",
+        staffName: "จ.ส.ต. มานพ กล้าหาญ",
+        actionTaken: "เข้าระงับเหตุ พูดคุยกับทั้งสองฝ่าย เหตุการณ์สงบลงแล้ว",
+        createdAt: "2026-07-16T12:25:00.000+07:00",
+      },
+    ],
+  },
+  {
+    id: "i6",
+    reporterId: "u2",
+    reporterName: "วิภาวดี ใจดี",
+    category: "other",
+    description: "พบสัตว์มีพิษ (งู) ในห้องน้ำชายชั้น 1 อาคารวิทยาศาสตร์",
+    locationName: "อาคารวิทยาศาสตร์ ห้องน้ำชาย ชั้น 1",
+    status: "processing",
+    createdAt: "2026-07-17T09:00:00.000+07:00",
+    updatedAt: "2026-07-17T09:30:00.000+07:00",
+    rescueLogs: [
+      {
+        id: "rl4",
+        incidentId: "i6",
+        staffId: "s2",
+        staffName: "จ.ส.ต. มานพ กล้าหาญ",
+        actionTaken: "กั้นพื้นที่และรอทีมจับสัตว์มีพิษ",
+        createdAt: "2026-07-17T09:30:00.000+07:00",
+      },
+    ],
+  },
+];

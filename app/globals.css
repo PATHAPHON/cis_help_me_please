@@ -1,26 +1,198 @@
+/* ── All @import must come first ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import "tailwindcss";
 
+/* ── Design Tokens ───────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary — Google Blue */
+  --color-primary:          #1a73e8;
+  --color-primary-dark:     #1557b0;
+  --color-primary-light:    #e8f0fe;
+  --color-on-primary:       #ffffff;
+
+  /* Surface / Background */
+  --color-background:       #f8f9fa;
+  --color-surface:          #ffffff;
+  --color-surface-variant:  #f1f3f4;
+
+  /* Text */
+  --color-on-surface:       #202124;
+  --color-on-surface-mid:   #3c4043;
+  --color-on-surface-low:   #5f6368;
+  --color-on-surface-faint: #80868b;
+
+  /* Outline */
+  --color-outline:          #dadce0;
+  --color-outline-strong:   #bdc1c6;
+
+  /* Status */
+  --color-pending:          #f9ab00;
+  --color-pending-bg:       #fef7e0;
+  --color-processing:       #1a73e8;
+  --color-processing-bg:    #e8f0fe;
+  --color-resolved:         #1e8e3e;
+  --color-resolved-bg:      #e6f4ea;
+
+  /* Semantic */
+  --color-error:            #d93025;
+  --color-error-bg:         #fce8e6;
+  --color-warning:          #f9ab00;
+  --color-success:          #1e8e3e;
+
+  /* Category colors */
+  --color-accident:         #e8710a;
+  --color-sickness:         #d93025;
+  --color-violence:         #7c4dff;
+  --color-fight:            #c62828;
+  --color-fire:             #e64a19;
+  --color-other:            #5f6368;
+
+  /* Pastel card backgrounds */
+  --color-card-green:       #dbe9c9;
+  --color-card-green-dark:  #b5d0a0;
+  --color-card-blue:        #d6ecf8;
+  --color-card-purple:      #e8dcf4;
+  --color-card-yellow:      #fce9a6;
+
+  /* Nav */
+  --color-nav-dark:         #2c2f36;
+
+  /* Radius */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* Shadow (Google Material-like) */
+  --shadow-sm:  0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+  --shadow-md:  0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+  --shadow-lg:  0 2px 6px 2px rgba(60,64,67,.15), 0 1px 2px 0 rgba(60,64,67,.3);
+
+  /* Typography scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+
+  /* Spacing (mobile-safe zones) */
+  --bottom-nav-height: 80px;
+  --top-bar-height:    56px;
+  --safe-bottom:       env(safe-area-inset-bottom, 0px);
 }
 
+/* ── Tailwind Theme Registration ─────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Roboto", Arial, Helvetica, sans-serif;
+
+  --color-primary:           var(--color-primary);
+  --color-primary-dark:      var(--color-primary-dark);
+  --color-primary-light:     var(--color-primary-light);
+  --color-on-primary:        var(--color-on-primary);
+  --color-background:        var(--color-background);
+  --color-surface:           var(--color-surface);
+  --color-surface-variant:   var(--color-surface-variant);
+  --color-on-surface:        var(--color-on-surface);
+  --color-on-surface-mid:    var(--color-on-surface-mid);
+  --color-on-surface-low:    var(--color-on-surface-low);
+  --color-on-surface-faint:  var(--color-on-surface-faint);
+  --color-outline:           var(--color-outline);
+  --color-outline-strong:    var(--color-outline-strong);
+  --color-error:             var(--color-error);
+  --color-error-bg:          var(--color-error-bg);
+  --color-success:           var(--color-success);
+  --color-warning:           var(--color-warning);
+  --color-pending:           var(--color-pending);
+  --color-pending-bg:        var(--color-pending-bg);
+  --color-processing:        var(--color-processing);
+  --color-processing-bg:     var(--color-processing-bg);
+  --color-resolved:          var(--color-resolved);
+  --color-resolved-bg:       var(--color-resolved-bg);
+
+  --color-card-green:        var(--color-card-green);
+  --color-card-green-dark:   var(--color-card-green-dark);
+  --color-card-blue:         var(--color-card-blue);
+  --color-card-purple:       var(--color-card-purple);
+  --color-card-yellow:       var(--color-card-yellow);
+  --color-nav-dark:          var(--color-nav-dark);
+
+  --radius-xs:   var(--radius-xs);
+  --radius-sm:   var(--radius-sm);
+  --radius-md:   var(--radius-md);
+  --radius-lg:   var(--radius-lg);
+  --radius-xl:   var(--radius-xl);
+  --radius-full: var(--radius-full);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base / Reset ────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+}
+
+/* ── Material Symbols utility class ─────────────────────────────────── */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.material-symbols-rounded.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ── Scrollbar hide (mobile UX) ──────────────────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Ripple animation ────────────────────────────────────────────────── */
+@keyframes ripple {
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+/* ── Page transition ─────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.2s ease-out;
+}
+
+/* ── Safe bottom pad for bottom nav ─────────────────────────────────── */
+.pb-nav {
+  padding-bottom: calc(var(--bottom-nav-height) + var(--safe-bottom));
 }
