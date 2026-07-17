@@ -12,6 +12,7 @@ erDiagram
         int id PK
         string name
         string phone
+        string email "unique"
         string student_id "nullable"
         string residence
         string role "user / staff / admin"
@@ -50,6 +51,7 @@ erDiagram
 | id | int | PK, Auto Increment | ไอดีผู้ใช้ |
 | name | string | Not Null | ชื่อ-นามสกุล |
 | phone | string | Not Null | เบอร์โทรศัพท์ |
+| email | string | Not Null, Unique | อีเมลผู้ใช้งาน |
 | student_id | string | Nullable | รหัสนักศึกษา/บุคลากร |
 | residence | string | Not Null | สถานที่พัก/หน่วยงานสังกัด |
 | role | string | Not Null, Default: 'user' | บทบาท ('user', 'staff', 'admin') |

@@ -41,7 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored) as MockUser;
-        setUser(parsed);
+        setTimeout(() => {
+          setUser(parsed);
+        }, 0);
       }
     } catch {
       // ignore

@@ -4,69 +4,64 @@
 
 ```mermaid
 classDiagram
-    class User {
-        +int id
+    class MockUser {
+        +string id
         +string name
         +string phone
         +string studentId
         +string residence
-        +string role
-        +string passwordHash
-        +timestamp createdAt
-        +register() bool
-        +login() bool
+        +Role role
+        +string email
     }
 
     class Incident {
-        +int id
-        +int reporterId
-        +string category
+        +string id
+        +string reporterId
+        +string reporterName
+        +IncidentCategory category
         +string description
         +string locationName
         +float latitude
         +float longitude
         +string imageUrl
-        +string status
-        +timestamp createdAt
-        +timestamp updatedAt
-        +create() Incident
-        +updateStatus(status) bool
-        +getDetails() Incident
+        +IncidentStatus status
+        +string createdAt
+        +string updatedAt
+        +RescueLog[] rescueLogs
     }
 
     class RescueLog {
-        +int id
-        +int incidentId
-        +int staffId
+        +string id
+        +string incidentId
+        +string staffId
+        +string staffName
         +string actionTaken
-        +timestamp createdAt
-        +saveLog() bool
+        +string createdAt
     }
 
-    class AuthController {
-        +registerUser(req) Response
-        +loginUser(req) Response
-        +logoutUser() Response
+    class AuthContext {
+        +MockUser user
+        +Role role
+        +boolean isLoggedIn
+        +loginAs(role: Role) void
+        +logout() void
+        +updateUserRole(userId: string, newRole: Role) void
     }
 
-    class IncidentController {
-        +createIncident(req) Response
-        +getIncidents(status) Response
-        +getIncidentById(id) Response
-        +updateIncidentStatus(id, req) Response
+    class IncidentsContext {
+        +Incident[] incidents
+        +getById(id: string) Incident
+        +getByReporter(reporterId: string) Incident[]
+        +createIncident(input) Incident
+        +updateStatus(id: string, status: IncidentStatus) void
+        +addRescueLog(input) void
     }
 
-    class ReportController {
-        +getCategoryStatistics() Response
-        +getResponseTimeStatistics() Response
-    }
-
-    User "1" --> "*" Incident : reports
-    User "1" --> "*" RescueLog : handles
-    Incident "1" --> "*" RescueLog : logs
+    MockUser "1" --> "*" Incident : reports
+    MockUser "1" --> "*" RescueLog : handles (staff)
+    Incident "1" --> "*" RescueLog : contains
     
-    AuthController ..> User : authenticates
-    IncidentController ..> Incident : manages
-    IncidentController ..> RescueLog : creates
-    ReportController ..> Incident : aggregates
+    AuthContext ..> MockUser : manages state
+    IncidentsContext ..> Incident : manages state
+    IncidentsContext ..> RescueLog : creates / appends
 ```

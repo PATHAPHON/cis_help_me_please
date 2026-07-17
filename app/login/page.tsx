@@ -11,125 +11,171 @@ const ROLE_OPTIONS: {
   subtitle: string;
   icon: string;
   color: string;
-  bg: string;
+  variant: "blue" | "green" | "purple";
 }[] = [
   {
     role: "user",
     label: "ผู้แจ้งเหตุ",
-    subtitle: "นักศึกษา / บุคลากร",
+    subtitle: "นักศึกษา / บุคลากรทั่วไป",
     icon: "person",
-    color: "#1a73e8",
-    bg: "#e8f0fe",
+    color: "var(--color-primary)",
+    variant: "blue",
   },
   {
     role: "staff",
     label: "เจ้าหน้าที่",
-    subtitle: "เจ้าหน้าที่ช่วยเหลือ",
+    subtitle: "หน่วยระงับเหตุและช่วยเหลือ",
     icon: "security",
-    color: "#1e8e3e",
-    bg: "#e6f4ea",
+    color: "var(--color-resolved)",
+    variant: "green",
   },
   {
     role: "admin",
     label: "ผู้ดูแลระบบ",
-    subtitle: "ผู้บริหาร / แอดมิน",
+    subtitle: "ฝ่ายตรวจสอบและแอดมินระบบ",
     icon: "admin_panel_settings",
-    color: "#7c4dff",
-    bg: "#ede7f6",
+    color: "var(--color-violence)",
+    variant: "purple",
   },
 ];
+
+const bgStyles: Record<string, string> = {
+  blue: "var(--color-card-blue)",
+  green: "var(--color-card-green)",
+  purple: "var(--color-card-purple)",
+};
 
 export default function LoginPage() {
   const { loginAs } = useAuth();
 
   return (
-    <main className="flex flex-col min-h-dvh bg-surface px-6 py-10 fade-up">
-      {/* Header */}
-      <div className="flex flex-col items-center gap-3 mb-10">
-        <div
-          className="flex items-center justify-center rounded-2xl"
-          style={{ width: 72, height: 72, backgroundColor: "#e8f0fe" }}
-        >
-          <MaterialIcon
-            name="emergency"
-            filled
-            size={40}
-            style={{ color: "#1a73e8" }}
-          />
+    <main className="flex flex-col gap-5 px-4 pt-8 pb-6 fade-up mx-auto w-full">
+
+
+      {/* Login Welcome Hero Card - matching SOS green card format, but with key/lock visuals */}
+      <div
+        className="relative rounded-3xl p-5 overflow-hidden"
+        style={{ backgroundColor: "var(--color-card-blue)" }}
+      >
+        <div className="flex gap-4">
+          {/* Left content */}
+          <div className="flex-1 flex flex-col justify-between min-h-[140px]">
+            <span
+              className="flex items-center justify-center w-11 h-11 rounded-full"
+              style={{ backgroundColor: "rgba(255,255,255,0.7)" }}
+            >
+              <MaterialIcon
+                name="vpn_key"
+                filled
+                size={22}
+                style={{ color: "var(--color-primary)" }}
+              />
+            </span>
+
+            <div>
+              <h2 className="text-xl font-bold text-on-surface mb-1">
+                เข้าสู่ระบบ
+              </h2>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--color-on-surface-mid)" }}
+              >
+                กรุณาเลือกบทบาทของคุณ
+                <br />
+                เพื่อเข้าใช้งานระบบที่เกี่ยวข้อง
+              </p>
+            </div>
+          </div>
+
+          {/* Right — login icon in white card */}
+          <div
+            className="flex items-center justify-center rounded-2xl shrink-0"
+            style={{
+              width: 110,
+              height: 140,
+              backgroundColor: "rgba(255,255,255,0.85)",
+            }}
+          >
+            <MaterialIcon
+              name="lock"
+              filled
+              size={56}
+              style={{ color: "var(--color-primary)" }}
+            />
+          </div>
         </div>
-        <h1
-          className="text-2xl font-medium text-center"
-          style={{ color: "var(--color-on-surface)" }}
-        >
-          CIS Help Me Please
-        </h1>
-        <p
-          className="text-sm text-center"
-          style={{ color: "var(--color-on-surface-low)" }}
-        >
-          เลือกบทบาทของคุณเพื่อเข้าใช้งาน
-        </p>
       </div>
 
-      {/* Role cards */}
-      <div className="flex flex-col gap-3">
+      {/* Role cards styled as Pastel Cards */}
+      <div className="flex flex-col gap-3 mt-1">
+        <p className="text-xs font-bold px-1" style={{ color: "var(--color-on-surface-low)" }}>
+          เลือกประเภทผู้ใช้งาน
+        </p>
         {ROLE_OPTIONS.map((opt) => (
           <button
             key={opt.role}
             onClick={() => loginAs(opt.role)}
-            className="flex items-center gap-4 p-4 rounded-2xl border transition-all active:scale-[0.98]"
+            className="flex items-center gap-4 p-4 rounded-3xl transition-all active:scale-[0.98] text-left cursor-pointer"
             style={{
-              backgroundColor: "var(--color-surface)",
-              borderColor: "var(--color-outline)",
+              backgroundColor: bgStyles[opt.variant],
             }}
           >
+            {/* White circle icon container */}
             <span
-              className="flex items-center justify-center rounded-xl shrink-0"
-              style={{ width: 52, height: 52, backgroundColor: opt.bg }}
+              className="flex items-center justify-center w-12 h-12 rounded-full shrink-0"
+              style={{ backgroundColor: "rgba(255,255,255,0.75)" }}
             >
               <MaterialIcon
                 name={opt.icon}
                 filled
-                size={28}
+                size={24}
                 style={{ color: opt.color }}
               />
             </span>
-            <span className="flex flex-col items-start gap-0.5">
-              <span
-                className="text-base font-medium"
+
+            {/* Title & Subtitle */}
+            <div className="flex-1 min-w-0">
+              <p
+                className="text-sm font-bold truncate"
                 style={{ color: "var(--color-on-surface)" }}
               >
                 {opt.label}
-              </span>
-              <span
-                className="text-sm"
-                style={{ color: "var(--color-on-surface-low)" }}
+              </p>
+              <p
+                className="text-xs truncate mt-0.5"
+                style={{ color: "var(--color-on-surface-mid)" }}
               >
                 {opt.subtitle}
-              </span>
+              </p>
+            </div>
+
+            {/* Chevron Right */}
+            <span
+              className="flex items-center justify-center w-8 h-8 rounded-full"
+              style={{ backgroundColor: "rgba(255,255,255,0.4)" }}
+            >
+              <MaterialIcon
+                name="chevron_right"
+                size={20}
+                style={{ color: "var(--color-on-surface)" }}
+              />
             </span>
-            <MaterialIcon
-              name="chevron_right"
-              size={20}
-              className="ml-auto"
-              style={{ color: "var(--color-on-surface-faint)" }}
-            />
           </button>
         ))}
       </div>
 
       {/* Register link */}
       <p
-        className="text-sm text-center mt-8"
+        className="text-xs text-center mt-6"
         style={{ color: "var(--color-on-surface-low)" }}
       >
-        ยังไม่มีบัญชี?{" "}
+        ยังไม่มีบัญชีสมาชิก?{" "}
         <Link
           href="/register"
-          className="font-medium"
+          className="font-bold underline"
           style={{ color: "var(--color-primary)" }}
         >
-          สมัครสมาชิก
+          สมัครสมาชิกที่นี่
         </Link>
       </p>
     </main>

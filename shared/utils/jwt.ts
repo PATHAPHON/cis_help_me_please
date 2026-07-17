@@ -10,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-at-least-32-chara
  */
 export function signToken(payload: object, expiresIn: string | number = '24h'): string {
   return jwt.sign(payload, JWT_SECRET, {
-    expiresIn: expiresIn as any
+    expiresIn: expiresIn as (string | number)
   });
 }
 
@@ -19,10 +19,10 @@ export function signToken(payload: object, expiresIn: string | number = '24h'): 
  * @param token ตัว JWT String
  * @returns Payload ของ Token หรือ null หาก Token ไม่ถูกต้องหรือหมดอายุ
  */
-export function verifyToken<T = any>(token: string): T | null {
+export function verifyToken<T = unknown>(token: string): T | null {
   try {
     return jwt.verify(token, JWT_SECRET) as T;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

@@ -8,7 +8,7 @@ import Button from "@/shared/components/ui/Button";
 import { StatusBadge, Divider } from "@/shared/components/ui";
 import MaterialIcon from "@/shared/components/icons/MaterialIcon";
 import { useIncidents } from "@/features/incidents/hooks/useIncidents";
-import { useAuth } from "@/features/auth/hooks/useAuth";
+
 import { categoryMeta } from "@/features/incidents/utils/categoryMeta";
 import { formatDate, formatRelativeTime } from "@/shared/utils/formatDate";
 
@@ -19,7 +19,7 @@ export default function StaffIncidentDetailPage({
 }) {
   const { id } = use(params);
   const router = useRouter();
-  const { user } = useAuth();
+
   const { getById, updateStatus } = useIncidents();
   const [claiming, setClaiming] = useState(false);
 

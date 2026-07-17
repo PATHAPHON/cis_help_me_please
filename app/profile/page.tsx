@@ -1,7 +1,7 @@
 "use client";
 
 import AppShell from "@/shared/components/AppShell";
-import Button from "@/shared/components/ui/Button";
+
 import { Avatar } from "@/shared/components/ui/index";
 import MaterialIcon from "@/shared/components/icons/MaterialIcon";
 import { useAuth } from "@/features/auth/hooks/useAuth";

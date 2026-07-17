@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Avatar, Chip, Divider } from "@/shared/components/ui";
+import { Avatar, Chip } from "@/shared/components/ui";
 import MaterialIcon from "@/shared/components/icons/MaterialIcon";
 import { roleMeta } from "@/features/users/utils/roleMeta";
 import type { MockUser, Role } from "@/shared/types";

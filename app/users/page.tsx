@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+
 import AppShell from "@/shared/components/AppShell";
 import { Avatar, Chip } from "@/shared/components/ui/index";
 import MaterialIcon from "@/shared/components/icons/MaterialIcon";
@@ -19,7 +19,7 @@ const ROLE_CARD_BG: Record<Role, string> = {
 };
 
 export default function UsersPage() {
-  const router = useRouter();
+
   const [users, setUsers] = useState<MockUser[]>(MOCK_USERS);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [filter, setFilter] = useState<Role | "all">("all");

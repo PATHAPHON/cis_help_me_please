@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+
+import Link from "next/link";
 import { TextField } from "@/shared/components/ui/index";
 import Button from "@/shared/components/ui/Button";
 import MaterialIcon from "@/shared/components/icons/MaterialIcon";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export default function RegisterPage() {
-  const router = useRouter();
+
   const { loginAs } = useAuth();
   const [form, setForm] = useState({
     name: "",
@@ -40,22 +41,65 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-dvh bg-surface">
-      <main className="flex-1 px-5 py-6 flex flex-col gap-5 fade-up">
-        {/* Icon */}
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className="flex items-center justify-center rounded-xl"
-            style={{ width: 48, height: 48, backgroundColor: "#e8f0fe" }}
-          >
-            <MaterialIcon name="person_add" filled size={26} style={{ color: "#1a73e8" }} />
+    <main className="flex flex-col gap-5 px-4 pt-8 pb-6 fade-up mx-auto w-full">
+
+
+      {/* Register Welcome Hero Card - matching SOS green card format, but with purple theme */}
+      <div
+        className="relative rounded-3xl p-5 overflow-hidden"
+        style={{ backgroundColor: "var(--color-card-purple)" }}
+      >
+        <div className="flex gap-4">
+          {/* Left content */}
+          <div className="flex-1 flex flex-col justify-between min-h-[140px]">
+            <span
+              className="flex items-center justify-center w-11 h-11 rounded-full"
+              style={{ backgroundColor: "rgba(255,255,255,0.7)" }}
+            >
+              <MaterialIcon
+                name="person_add"
+                filled
+                size={22}
+                style={{ color: "var(--color-violence)" }}
+              />
+            </span>
+
+            <div>
+              <h2 className="text-xl font-bold text-on-surface mb-1">
+                สมัครสมาชิก
+              </h2>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--color-on-surface-mid)" }}
+              >
+                กรอกข้อมูลของคุณให้ครบถ้วน
+                <br />
+                เพื่อรับสิทธิ์ในการส่งรายงานแจ้งเหตุ
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="font-medium text-on-surface">สร้างบัญชีใหม่</p>
-            <p className="text-xs text-on-surface-faint">กรอกข้อมูลเพื่อสมัครสมาชิก</p>
+
+          {/* Right — register icon in white card */}
+          <div
+            className="flex items-center justify-center rounded-2xl shrink-0"
+            style={{
+              width: 110,
+              height: 140,
+              backgroundColor: "rgba(255,255,255,0.85)",
+            }}
+          >
+            <MaterialIcon
+              name="how_to_reg"
+              filled
+              size={56}
+              style={{ color: "var(--color-violence)" }}
+            />
           </div>
         </div>
+      </div>
 
+      {/* Form Fields container */}
+      <div className="flex flex-col gap-4 mt-1">
         <TextField
           label="ชื่อ-นามสกุล *"
           placeholder="เช่น สมชาย มีสุข"
@@ -112,23 +156,27 @@ export default function RegisterPage() {
           fullWidth
           loading={loading}
           onClick={handleSubmit}
-          className="mt-2"
+          className="mt-3 cursor-pointer"
         >
           <MaterialIcon name="check" size={20} />
           สมัครสมาชิก
         </Button>
+      </div>
 
-        <p className="text-sm text-center" style={{ color: "var(--color-on-surface-low)" }}>
-          มีบัญชีแล้ว?{" "}
-          <button
-            onClick={() => router.push("/login")}
-            className="font-medium"
-            style={{ color: "var(--color-primary)" }}
-          >
-            เข้าสู่ระบบ
-          </button>
-        </p>
-      </main>
-    </div>
+      {/* Login link */}
+      <p
+        className="text-xs text-center mt-4"
+        style={{ color: "var(--color-on-surface-low)" }}
+      >
+        มีบัญชีสมาชิกแล้ว?{" "}
+        <Link
+          href="/login"
+          className="font-bold underline"
+          style={{ color: "var(--color-primary)" }}
+        >
+          เข้าสู่ระบบที่นี่
+        </Link>
+      </p>
+    </main>
   );
 }
